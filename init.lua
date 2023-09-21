@@ -1,6 +1,11 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+vim.o.tabstop = 4 -- A TAB character looks like 4 spaces
+vim.o.expandtab = true -- Pressing the TAB key will insert spaces instead of a TAB character
+vim.o.softtabstop = 4 -- Number of spaces inserted instead of a TAB character
+vim.o.shiftwidth = 4 -- Number of spaces inserted when indenting
+
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system {
@@ -65,16 +70,6 @@ require('lazy').setup({
       end,
     },
   },
-
-  {
-  'navarasu/onedark.nvim',
-      lazy = false,
-      priority = 1000,
-      config = function()
-        require('onedark').load()
-      end,
-  },
-
   {
     'nvim-lualine/lualine.nvim',
     opts = {
@@ -125,6 +120,7 @@ require('lazy').setup({
 { import = 'custom.plugins' },
 }, {})
 
+vim.cmd('set number')
 vim.cmd('set relativenumber')
 
 
@@ -234,7 +230,7 @@ require('nvim-treesitter.configs').setup {
   },
 
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'svelte', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim' },
+  ensure_installed = { 'c', 'cpp', 'go', 'elixir', 'lua', 'python', 'svelte', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim' },
 
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
   auto_install = false,
@@ -339,6 +335,8 @@ local on_attach = function(_, bufnr)
   nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
   nmap('<leader>wl', function()
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+
+
   end, '[W]orkspace [L]ist Folders')
 
   -- Create a command `:Format` local to the LSP buffer
@@ -363,6 +361,7 @@ local servers = {
   tsserver = {},
   html = { filetypes = { 'html', 'twig', 'hbs'} },
   svelte = {},
+  elixirls = {},
 
   lua_ls = {
     Lua = {
@@ -445,5 +444,7 @@ cmp.setup {
   },
 }
 
+vim.keymap.set('n', '<leader>nn', '<Cmd>Neotree toggle<CR>')
+vim.keymap.set('n', '<leader>', '<Cmd>Neotree toggle<CR>')
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
