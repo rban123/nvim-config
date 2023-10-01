@@ -43,7 +43,7 @@ require('lazy').setup({
       'rafamadriz/friendly-snippets',
     },
   },
-  { 'folke/which-key.nvim', opts = {} },
+  --{ 'folke/which-key.nvim', opts = {} },
   {
     'lewis6991/gitsigns.nvim',
     opts = {
@@ -70,17 +70,17 @@ require('lazy').setup({
       end,
     },
   },
-  {
-    'nvim-lualine/lualine.nvim',
-    opts = {
-      options = {
-        icons_enabled = false,
-        theme = 'onedark',
-        component_separators = '|',
-        section_separators = '',
-      },
-    },
-  },
+  -- {
+  --   'nvim-lualine/lualine.nvim',
+  --   opts = {
+  --     options = {
+  --       icons_enabled = false,
+  --       theme = 'onedark',
+  --       component_separators = '|',
+  --       section_separators = '',
+  --     },
+  --   },
+  -- },
   {'evanleck/vim-svelte'},
   {'pangloss/vim-javascript'},
   {'HerringtonDarkholme/yats.vim'},
@@ -108,6 +108,14 @@ require('lazy').setup({
         end,
       },
     },
+  },
+  {
+  'mrcjkb/haskell-tools.nvim',
+  dependencies = {
+    'nvim-lua/plenary.nvim',
+  },
+  version = '^2', -- Recommended
+  ft = { 'haskell', 'lhaskell', 'cabal', 'cabalproject' },
   },
 
   {
@@ -314,7 +322,7 @@ local on_attach = function(_, bufnr)
 
     vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
   end
-
+  
   nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
   nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
 
@@ -362,6 +370,7 @@ local servers = {
   html = { filetypes = { 'html', 'twig', 'hbs'} },
   svelte = {},
   elixirls = {},
+  hls = {},
 
   lua_ls = {
     Lua = {
@@ -447,5 +456,6 @@ cmp.setup {
 vim.keymap.set('n', '<leader>nn', '<Cmd>Neotree toggle<CR>')
 vim.keymap.set('n', '<leader>hd', vim.diagnostic.disable)
 vim.keymap.set('n', '<leader>ed', vim.diagnostic.enable)
+vim.keymap.set('n', '<leader>Q', '<Cmd>q!<CR>')
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
