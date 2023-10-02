@@ -459,3 +459,5 @@ vim.keymap.set('n', '<leader>ed', vim.diagnostic.enable)
 vim.keymap.set('n', '<leader>Q', '<Cmd>q!<CR>')
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
+
+vim.keymap.set('n', '<leader>rw', vim.cmd.Ex)
