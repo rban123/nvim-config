@@ -43,7 +43,6 @@ require('lazy').setup({
       'rafamadriz/friendly-snippets',
     },
   },
-  --{ 'folke/which-key.nvim', opts = {} },
   {
     'lewis6991/gitsigns.nvim',
     opts = {
@@ -70,29 +69,18 @@ require('lazy').setup({
       end,
     },
   },
-  -- {
-  --   'nvim-lualine/lualine.nvim',
-  --   opts = {
-  --     options = {
-  --       icons_enabled = false,
-  --       theme = 'onedark',
-  --       component_separators = '|',
-  --       section_separators = '',
-  --     },
-  --   },
-  -- },
   {'evanleck/vim-svelte'},
   {'pangloss/vim-javascript'},
   {'HerringtonDarkholme/yats.vim'},
   {'codechips/coc-svelte'},
   {'windwp/nvim-ts-autotag'},
   {'tpope/vim-fugitive'},
-  {
-    'lukas-reineke/indent-blankline.nvim',
-    opts = {
-      char = '┊',
-      show_trailing_blankline_indent = false,
-    },
+  { "lukas-reineke/indent-blankline.nvim", main = "ibl",
+    config = function()
+      require("ibl").setup {
+        indent = { char = '┊' }
+      }
+    end
   },
   { 'numToStr/Comment.nvim', opts = {} },
   {
@@ -164,8 +152,8 @@ vim.o.smartcase = true
 vim.wo.signcolumn = 'yes'
 
 -- Decrease update time
-vim.o.updatetime = 250
-vim.o.timeoutlen = 300
+--vim.o.updatetime = 250
+--vim.o.timeoutlen = 300
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
